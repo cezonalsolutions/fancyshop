@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CEZOO Navbar</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#ffffff;
+  font-family:Arial,sans-serif;
+}
+
+/* FLOATING NAVBAR */
+.navbar{
+
+  position:fixed;
+
+  top:48px;
+  left:12px;
+  right:12px;
+
+  height:64px;
+
+  display:flex;
+  align-items:center;
+
+  padding:0 20px;
+
+  background:rgba(255,255,255,.95);
+
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  border:1px solid #e5e7eb;
+
+  border-radius:20px;
+
+  box-shadow:
+  0 8px 24px rgba(0,0,0,.08);
+
+  z-index:9999;
+
+  transition:.3s ease;
+}
+
+/* LOGO */
+.logo{
+
+  font-family:'Bungee',cursive;
+
+  font-size:24px;
+
+  color:#16a34a;
+
+  letter-spacing:2px;
+
+}
+
+/* SCROLL EFFECT */
+.navbar.scrolled{
+
+  background:#ffffff;
+
+  box-shadow:
+  0 12px 30px rgba(0,0,0,.12);
+
+}
+
+.content{
+
+  padding-top:100px;
+
+}
+
+
+.content{
+  padding-top:140px;
+  padding-left:15px;
+  padding-right:15px;
+}
+
+.pageTitle{
+
+  font-family:'Bungee',cursive;
+
+  font-size:30px;
+
+  color:#16a34a;
+
+  text-align:center;
+
+  letter-spacing:2px;
+
+  margin-bottom:24px;
+
+}
+
+.uploadCard{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.uploadCard label{
+  display:block;
+  margin-top:14px;
+  margin-bottom:8px;
+  font-weight:600;
+  color:#333;
+}
+
+.uploadCard input,
+.uploadCard select{
+  width:100%;
+  height:52px;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:0 14px;
+  font-size:15px;
+  outline:none;
+}
+
+.uploadBtn{
+  width:100%;
+  height:54px;
+  border:none;
+  border-radius:16px;
+  margin-top:22px;
+  background:#16a34a;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+}
+
+#fileNames{
+  margin-top:12px;
+  font-size:13px;
+  color:#16a34a;
+}
+.uploadBox{
+
+  height:100px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  text-align:center;
+
+  border:2px dashed #16a34a;
+
+  border-radius:16px;
+
+  background:#f7fff8;
+
+  color:#16a34a;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+.uploadBox:hover{
+
+  background:#ecfdf5;
+
+}
+textarea{
+
+  width:100%;
+
+  min-height:120px;
+
+  border:1px solid #e5e7eb;
+
+  border-radius:14px;
+
+  padding:14px;
+
+  font-size:15px;
+
+  outline:none;
+
+  resize:vertical;
+
+  font-family:Arial,sans-serif;
+
+}
+#toast{
+
+  position:fixed;
+
+  bottom:25px;
+
+  left:50%;
+
+  transform:
+  translateX(-50%);
+
+  background:#16a34a;
+
+  color:#fff;
+
+  padding:14px 22px;
+
+  border-radius:14px;
+
+  font-weight:700;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:.3s;
+
+}
+/* SPLASH */
+
+#splash{
+
+  position:fixed;
+
+  inset:0;
+
+  background:#ffffff;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  z-index:999999;
+
+  animation:
+  splashHide .7s ease
+  2.2s forwards;
+
+}
+
+.splashLogo{
+
+  font-family:'Bungee',cursive;
+
+  font-size:42px;
+
+  color:#16a34a;
+
+  letter-spacing:3px;
+
+  opacity:0;
+
+  transform:
+  translateY(80px)
+  scale(.6);
+
+  animation:
+  logoEnter 1s
+  cubic-bezier(.22,1,.36,1)
+  forwards;
+
+}
+
+@keyframes logoEnter{
+
+  0%{
+
+    opacity:0;
+
+    transform:
+    translateY(80px)
+    scale(.6);
+
+  }
+
+  100%{
+
+    opacity:1;
+
+    transform:
+    translateY(0)
+    scale(1);
+
+  }
+
+}
+
+@keyframes splashHide{
+
+  to{
+
+    opacity:0;
+
+    visibility:hidden;
+
+  }
+
+}
+</style>
+</head>
+
+<body>
+<div id="splash">
+
+  <div class="splashLogo">
+    CEZOO
+  </div>
+
+</div>
+<nav class="navbar" id="navbar">
+
+  <div class="logo">
+    CEZOO
+  </div>
+
+</nav>
+<div class="content">
+
+  <h2 class="pageTitle">
+    Upload Product
+  </h2>
+
+  <div class="uploadCard">
+
+    <label>Product Name</label>
+    <input
+      id="productName"
+      type="text"
+      placeholder="Enter product name"
+    >
+
+    <label>MRP Price</label>
+    <input
+      id="mrpPrice"
+      type="number"
+      placeholder="₹ Original price"
+    >
+
+    <label>Discount Price</label>
+    <input
+      id="discountPrice"
+      type="number"
+      placeholder="₹ Selling price"
+    >
+
+    <label>Product Type</label>
+    <input
+      id="productType"
+      type="text"
+      placeholder="Necklace, Ring..."
+    >
+
+    <label>Size</label>
+    <input
+      id="productSize"
+      type="text"
+      placeholder="500g / XL / 1 Litre"
+    >
+
+    <div class="imageUpload">
+
+      <input
+        type="file"
+        id="img1"
+        accept="image/*"
+        hidden
+      >
+
+      <label
+        for="img1"
+        class="uploadBox"
+      >
+        Image 1
+      </label>
+
+    </div>
+
+    <div class="imageUpload">
+
+      <input
+        type="file"
+        id="img2"
+        accept="image/*"
+        hidden
+      >
+
+      <label
+        for="img2"
+        class="uploadBox"
+      >
+        Image 2
+      </label>
+
+    </div>
+
+    <div class="imageUpload">
+
+      <input
+        type="file"
+        id="img3"
+        accept="image/*"
+        hidden
+      >
+
+      <label
+        for="img3"
+        class="uploadBox"
+      >
+        Image 3
+      </label>
+
+    </div>
+
+    <div id="fileNames"></div>
+<label>Additional Details (Optional)</label>
+
+<textarea
+  id="additionalDetails"
+  placeholder="Side heading and txt..."
+></textarea>
+    <button
+      type="button"
+      class="uploadBtn"
+    >
+      Upload Product
+    </button>
+
+  </div>
+
+</div>
+<div id="toast">
+  ✅ Product Added Successfully
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+
+const SUPABASE_URL =
+"https://ummzqbaalrxyyulrkxaz.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_o79JQ-LkQkFohS4m7waJVw_U_xiIX8r";
+
+const client =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+window.addEventListener(
+  "scroll",
+  function(){
+
+    const nav =
+    document.getElementById(
+      "navbar"
+    );
+
+    if(
+      window.scrollY > 20
+    ){
+
+      nav.classList.add(
+        "scrolled"
+      );
+
+    }else{
+
+      nav.classList.remove(
+        "scrolled"
+      );
+
+    }
+
+  }
+);
+
+
+
+
+const files =
+document.querySelectorAll(
+'input[type="file"]'
+);
+
+const fileNames =
+document.getElementById(
+'fileNames'
+);
+
+files.forEach(file=>{
+
+  file.addEventListener(
+    'change',
+    ()=>{
+
+      let names=[];
+
+      files.forEach(f=>{
+
+        if(
+          f.files[0]
+        ){
+
+          names.push(
+            f.files[0].name
+          );
+
+        }
+
+      });
+
+      fileNames.innerHTML =
+      names.join('<br>');
+
+    }
+  );
+
+});
+
+
+document
+.querySelector(".uploadBtn")
+.addEventListener(
+"click",
+async function(){
+
+const product_name =
+document.getElementById(
+"productName"
+).value;
+
+const mrp_price =
+document.getElementById(
+"mrpPrice"
+).value;
+const additional_details =
+document.getElementById(
+"additionalDetails"
+).value;
+const discount_price =
+document.getElementById(
+"discountPrice"
+).value;
+
+const product_type =
+document.getElementById(
+"productType"
+).value;
+
+const size =
+document.getElementById(
+"productSize"
+).value;
+
+const file1 =
+document.getElementById("img1")
+.files[0];
+
+let image1 = "";
+
+if(file1){
+
+const fileName =
+Date.now() +
+"-" +
+file1.name;
+
+await client.storage
+.from("fancy-images")
+.upload(
+fileName,
+file1
+);
+
+const { data } =
+client.storage
+.from("fancy-images")
+.getPublicUrl(fileName);
+
+image1 =
+data.publicUrl;
+
+}
+
+const file2 =
+document.getElementById("img2")
+.files[0];
+
+let image2 = "";
+
+if(file2){
+
+const fileName =
+Date.now() +
+"-" +
+file2.name;
+
+await client.storage
+.from("fancy-images")
+.upload(
+fileName,
+file2
+);
+
+const { data } =
+client.storage
+.from("fancy-images")
+.getPublicUrl(fileName);
+
+image2 =
+data.publicUrl;
+}
+
+const file3 =
+document.getElementById("img3")
+.files[0];
+
+let image3 = "";
+
+if(file3){
+
+const fileName =
+Date.now() +
+"-" +
+file3.name;
+
+await client.storage
+.from("fancy-images")
+.upload(
+fileName,
+file3
+);
+
+const { data } =
+client.storage
+.from("fancy-images")
+.getPublicUrl(fileName);
+
+image3 =
+data.publicUrl;
+}
+
+const {
+error
+} =
+await client
+.from("fancy_products")
+.insert([{
+
+product_name,
+
+mrp_price,
+
+discount_price,
+
+product_type,
+
+size,
+
+additional_details,
+
+image1,
+
+image2,
+
+image3
+
+}]);
+if(error){
+
+alert(
+error.message
+);
+
+return;
+
+}
+
+const btn =
+document.querySelector(
+".uploadBtn"
+);
+
+btn.innerText =
+"✅ Product Added";
+
+btn.disabled =
+true;
+
+setTimeout(()=>{
+document.getElementById(
+"productName"
+).value = "";
+
+document.getElementById(
+"mrpPrice"
+).value = "";
+
+document.getElementById(
+"discountPrice"
+).value = "";
+
+document.getElementById(
+"productType"
+).value = "";
+
+document.getElementById(
+"productSize"
+).value = "";
+
+document.getElementById(
+"additionalDetails"
+).value = "";
+
+document.getElementById(
+"img1"
+).value = "";
+
+document.getElementById(
+"img2"
+).value = "";
+
+document.getElementById(
+"img3"
+).value = "";
+
+document.querySelector(
+'label[for="img1"]'
+).innerHTML =
+"Image 1";
+
+document.querySelector(
+'label[for="img2"]'
+).innerHTML =
+"Image 2";
+
+document.querySelector(
+'label[for="img3"]'
+).innerHTML =
+"Image 3";
+
+document.getElementById(
+"fileNames"
+).innerHTML = "";
+btn.innerText =
+"Upload Product";
+
+btn.disabled =
+false;
+
+},3000);
+
+});
+function previewImage(
+inputId,
+labelFor
+){
+
+document
+.getElementById(inputId)
+.addEventListener(
+"change",
+function(){
+
+const file =
+this.files[0];
+
+if(!file) return;
+
+const reader =
+new FileReader();
+
+reader.onload =
+function(e){
+
+document.querySelector(
+`label[for="${labelFor}"]`
+).innerHTML =
+`<img
+src="${e.target.result}"
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:14px;
+">`;
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+previewImage(
+"img1",
+"img1"
+);
+
+previewImage(
+"img2",
+"img2"
+);
+
+previewImage(
+"img3",
+"img3"
+);
+</script>
+
+</body>
+</html>
